@@ -80,4 +80,18 @@ public class Employees {
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
     }
+
+    @Override
+    public String toString() {
+        return "Employees{" +
+                "employeeNumber=" + employeeNumber +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", extension='" + extension + '\'' +
+                ", email='" + email + '\'' +
+                ", officeCode='" + officeCode + '\'' +
+                ", reportsTo=" + reportsTo +
+                ", jobTitle='" + jobTitle + '\'' +
+                '}';
+    }
 }
