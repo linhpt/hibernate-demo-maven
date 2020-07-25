@@ -1,16 +1,14 @@
 package org.hibernatedemomaven.models;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "employees")
+@Entity(name = "employees_table")
 public class Employee {
     @Id
     private Long employeeNumber;
-    private String lastName;
-    private String firstName;
+    private Name fullName;
     private String extension;
     private String email;
     private String officeCode;
@@ -25,20 +23,12 @@ public class Employee {
         this.employeeNumber = employeeNumber;
     }
 
-    public String getLastName() {
-        return lastName;
+    public Name getFullName() {
+        return fullName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFullName(Name fullName) {
+        this.fullName = fullName;
     }
 
     public String getExtension() {
@@ -83,10 +73,9 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employees{" +
+        return "Employee{" +
                 "employeeNumber=" + employeeNumber +
-                ", lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
+                ", fullName=" + fullName +
                 ", extension='" + extension + '\'' +
                 ", email='" + email + '\'' +
                 ", officeCode='" + officeCode + '\'' +
