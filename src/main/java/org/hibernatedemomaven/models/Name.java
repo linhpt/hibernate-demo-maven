@@ -1,19 +1,12 @@
 package org.hibernatedemomaven.models;
 
 import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 @Embeddable
-public class Name {
-    private String lastName;
+public class Name implements Serializable {
     private String firstName;
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    private String lastName;
 
     public String getFirstName() {
         return firstName;
@@ -23,11 +16,11 @@ public class Name {
         this.firstName = firstName;
     }
 
-    @Override
-    public String toString() {
-        return "Name{" +
-                "lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                '}';
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

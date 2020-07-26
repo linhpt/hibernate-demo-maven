@@ -1,26 +1,53 @@
 package org.hibernatedemomaven.models;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Entity(name = "employees_table")
+@Entity(name = "employees")
 public class Employee {
     @Id
-    private Long employeeNumber;
+    @EmbeddedId
     private Name fullName;
     private String extension;
     private String email;
     private String officeCode;
-    private Long reportsTo;
     private String jobTitle;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "street", column = @Column(name = "home_street_name")),
+            @AttributeOverride(name = "city", column = @Column(name = "home_city_name")),
+            @AttributeOverride(name = "state", column = @Column(name = "home_state_name")),
+    })
+    private Address homeAddress;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "street", column = @Column(name = "office_street_name")),
+            @AttributeOverride(name = "city", column = @Column(name = "office_city_name")),
+            @AttributeOverride(name = "state", column = @Column(name = "office_state_name")),
+    })
+    private Address officeAddress;
 
-    public Long getEmployeeNumber() {
-        return employeeNumber;
+    public Address getOfficeAddress() {
+        return officeAddress;
     }
 
-    public void setEmployeeNumber(Long employeeNumber) {
-        this.employeeNumber = employeeNumber;
+    public void setOfficeAddress(Address officeAddress) {
+        this.officeAddress = officeAddress;
+    }
+
+    public Address getHomeAddress() {
+        return homeAddress;
+    }
+
+    public void setHomeAddress(Address homeAddress) {
+        this.homeAddress = homeAddress;
+    }
+
+    public Address getAddress() {
+        return homeAddress;
+    }
+
+    public void setAddress(Address address) {
+        this.homeAddress = address;
     }
 
     public Name getFullName() {
@@ -55,14 +82,6 @@ public class Employee {
         this.officeCode = officeCode;
     }
 
-    public Long getReportsTo() {
-        return reportsTo;
-    }
-
-    public void setReportsTo(Long reportsTo) {
-        this.reportsTo = reportsTo;
-    }
-
     public String getJobTitle() {
         return jobTitle;
     }
@@ -74,12 +93,10 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee{" +
-                "employeeNumber=" + employeeNumber +
                 ", fullName=" + fullName +
                 ", extension='" + extension + '\'' +
                 ", email='" + email + '\'' +
                 ", officeCode='" + officeCode + '\'' +
-                ", reportsTo=" + reportsTo +
                 ", jobTitle='" + jobTitle + '\'' +
                 '}';
     }
